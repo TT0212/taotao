@@ -9,6 +9,7 @@ import com.taotao.pojo.TbItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -41,8 +42,29 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public TaotaoResult updateItem(List<TbItem> tbItems, int i, Date date) {
-        return null;
+    public TaotaoResult updateItem(List<TbItem> tbItems, int type, Date date) {
+
+       if (tbItems.size()<=0){
+           return TaotaoResult.build(500,"请先勾选，在操作",null);
+       }
+       //需要修改的商品id
+        List<Long> ids=new ArrayList<>();
+        for (TbItem tbItem:tbItems) {
+            ids.add(tbItem.getId());
+        }
+         int count=tbItemMapper.updateItemByIds(ids,type,date);
+        /**
+         * count>0 代表我们修改了数据库里面的数据
+         */
+        if (count>0 && type==0){
+            return  TaotaoResult.build(200,"商品下架成功",null);
+        }else if (count>0 && type==1){
+            return  TaotaoResult.build(200,"商品上架成功",null);
+
+        }else  if (count>0 && type==2){
+            return  TaotaoResult.build(200,"删除成功",null);
+        }
+        return  TaotaoResult.build(500,"商品修改失败",null);
     }
 
 }

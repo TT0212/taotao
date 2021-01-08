@@ -46,6 +46,7 @@
             <artifactId>druid</artifactId>
         </dependency>
     </dependencies>
+    <!-- 可以放行映射文件-->
     <build>
         <resources>
             <resource>
