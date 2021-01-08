@@ -20,20 +20,36 @@ public class ItemController {
 
     @Autowired
     private ItemService itemService;
-
+    /**
+     *  根据商品id查询商品信息
+     * @param itemId
+     * @return
+     */
     @RequestMapping("/{itemId}")
     @ResponseBody
     public TbItem getItemById(@PathVariable Long itemId) {
-        //根据商品id查询商品信息
         TbItem tbItem = itemService.findTbItemById(itemId);
         return tbItem;
     }
+
+    /**
+     * 查询数据库tbitem表中 的总记录条数
+     * @param page
+     * @param limit
+     * @return
+     */
     @RequestMapping("/showItemPage")
     @ResponseBody
     public LayuiResult showItemPage(Integer page, Integer limit){
         LayuiResult resuult=itemService.findTbItemBypage(page,limit);
         return resuult;
     }
+
+    /**
+     * 勾选中删除
+     * @param tbItems
+     * @return
+     */
 
     @RequestMapping("/itemDelete")
     @ResponseBody
@@ -43,6 +59,12 @@ public class ItemController {
 
         return result;
     }
+
+    /**
+     *商品上架
+     * @param tbItems
+     * @return
+     */
     @RequestMapping("/commodityUpperShelves")
     @ResponseBody
     public TaotaoResult commodityUpperShelves(@RequestBody  List<TbItem> tbItems){
@@ -51,6 +73,12 @@ public class ItemController {
 
         return result;
     }
+
+    /**
+     * 商品下架
+     * @param tbItems
+     * @return
+     */
     @RequestMapping("/commodityLowerShelves")
     @ResponseBody
     public TaotaoResult commodityLowerShelves(@RequestBody  List<TbItem> tbItems){
