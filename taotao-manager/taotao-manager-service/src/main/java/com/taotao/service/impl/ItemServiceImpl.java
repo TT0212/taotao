@@ -1,6 +1,7 @@
 package com.taotao.service.impl;
 
 import com.taotao.pojo.LayuiResult;
+import com.taotao.pojo.TaotaoResult;
 import com.taotao.service.ItemService;
 import com.taotao.mapper.TbItemMapper;
 import com.taotao.pojo.TbItem;
@@ -8,6 +9,7 @@ import com.taotao.pojo.TbItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -37,4 +39,10 @@ public class ItemServiceImpl implements ItemService {
        result.setData(data);
         return result;
     }
+
+    @Override
+    public TaotaoResult updateItem(List<TbItem> tbItems, int i, Date date) {
+        return null;
+    }
+
 }

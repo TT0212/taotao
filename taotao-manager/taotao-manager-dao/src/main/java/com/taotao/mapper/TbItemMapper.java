@@ -19,4 +19,6 @@ public interface TbItemMapper {
 
     @Select("SELECT * FROM tbitem LIMIT #{index},#{pageSize} ")
     List<TbItem> findTbItemByPage(@Param("index") int index,@Param("pageSize") int pageSize);
+
+
 }

@@ -91,7 +91,8 @@ table.on('toolbar(itemToolBar)',function(obj) {
 						dataType : "json",
 						success : function(message) {
 						if (message.status == 200) {
-							layer.alert('删除商品成功');
+							layer.alert(message.msg);
+							//自动请求服务器 获取最新的table表中的数据{可以携带参数}
 							table.reload('reloadTable',{});
 						} else {
 							layer.alert(message.msg);
