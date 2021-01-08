@@ -43,4 +43,20 @@ public class ItemController {
 
         return result;
     }
+    @RequestMapping("/commodityUpperShelves")
+    @ResponseBody
+    public TaotaoResult commodityUpperShelves(@RequestBody  List<TbItem> tbItems){
+        Date date=new Date();
+        TaotaoResult result= itemService.updateItem(tbItems,1,date);
+
+        return result;
+    }
+    @RequestMapping("/commodityLowerShelves")
+    @ResponseBody
+    public TaotaoResult commodityLowerShelves(@RequestBody  List<TbItem> tbItems){
+        Date date=new Date();
+        TaotaoResult result= itemService.updateItem(tbItems,0,date);
+
+        return result;
+    }
 }
