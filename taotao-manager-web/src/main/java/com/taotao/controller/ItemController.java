@@ -87,4 +87,22 @@ public class ItemController {
 
         return result;
     }
+    /**
+     * 多条件搜索信息
+     * @param page  当前页
+     * @param limit  每页显示条数
+     * @param title   商品名称
+     * @param priceMin  商品单价最小值
+     * @param priceMax 商品单价最大值
+     * @param cid   分页id
+     * @return
+     */
+
+    @RequestMapping("/searchItem")
+    @ResponseBody
+    public LayuiResult searchItem(Integer page,Integer limit,String title,Integer priceMin,Integer priceMax,Long cId){
+        LayuiResult result=itemService.gitItem(page,limit,title,priceMin,priceMax,cId);
+
+        return  result;
+    }
 }

@@ -24,4 +24,19 @@ public interface ItemService {
      * @return
      */
     TaotaoResult updateItem(List<TbItem> tbItems, int type, Date date);
+
+
+    /**
+     * 多条件搜索信息
+     * @param page  当前页
+     * @param limit  每页显示条数
+     * @param title   商品名称
+     * @param priceMin  商品单价最小值
+     * @param priceMax 商品单价最大值
+     * @param cId   分页id
+     *
+     * @return
+     */
+
+    LayuiResult gitItem(Integer page, Integer limit, String title, Integer priceMin, Integer priceMax, Long cId );
 }

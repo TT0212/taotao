@@ -16,4 +16,29 @@
 
     </update>
 
+    <select id="findTbItemByLikeConut" resultType="int">
+      SELECT COUNT(*) FROM  tbitem
+        <where>
+            <if test="title !='' ">
+                AND title LIKE  "%${title}%" AND
+            </if>
+            price BETWEEN  #{priceMin} AND #{priceMax}
+            <if test="cId !=null">
+                AND cId=#{cId}
+            </if>
+        </where>
+    </select>
+   <select id="findTbItemByLike" resultType="com.taotao.pojo.TbItem">
+       SELECT * FROM  tbitem
+       <where>
+           <if test="title !='' ">
+               AND title LIKE  "%${title}%" AND
+           </if>
+           price BETWEEN  #{priceMin} AND #{priceMax}
+           <if test="cId !=null">
+               AND cId=#{cId}
+           </if>
+       </where>
+       LIMIT #{page},#{limit}
+   </select>
 </mapper>

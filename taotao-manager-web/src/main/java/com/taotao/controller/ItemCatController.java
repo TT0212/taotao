@@ -1,5 +1,6 @@
 package com.taotao.controller;
 
+import com.taotao.pojo.LayuiResult;
 import com.taotao.pojo.ZtreeResult;
 import com.taotao.service.ItemCatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,4 +29,6 @@ public class ItemCatController {
        List<ZtreeResult> results= itemCatService.getZtreeResult(id);
         return results;
     }
+
+
 }
