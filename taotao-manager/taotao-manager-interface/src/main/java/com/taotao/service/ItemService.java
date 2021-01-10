@@ -1,6 +1,7 @@
 package com.taotao.service;
 
 import com.taotao.pojo.LayuiResult;
+import com.taotao.pojo.PictureResult;
 import com.taotao.pojo.TaotaoResult;
 import com.taotao.pojo.TbItem;
 
@@ -39,4 +40,20 @@ public interface ItemService {
      */
 
     LayuiResult gitItem(Integer page, Integer limit, String title, Integer priceMin, Integer priceMax, Long cId );
+
+    /**
+     * 上传图片到图片服务器
+     * @param fileName 图片名
+     * @param bytes    图片的字节数组
+     * @return
+     */
+      PictureResult addPicture(String fileName, byte[] bytes);
+
+    /**
+     * 添加商品信息到数据库
+     * @param tbItem  商品基本信息
+     * @param itemDesc 商品描述信息
+     * @return
+     */
+    TaotaoResult addItem(TbItem tbItem, String itemDesc);
 }

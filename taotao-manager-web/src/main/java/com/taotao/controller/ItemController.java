@@ -1,16 +1,20 @@
 package com.taotao.controller;
 
 import com.taotao.pojo.LayuiResult;
+import com.taotao.pojo.PictureResult;
 import com.taotao.pojo.TaotaoResult;
 import com.taotao.pojo.TbItem;
 import com.taotao.service.ItemService;
+import com.taotao.utils.FtpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -94,7 +98,7 @@ public class ItemController {
      * @param title   商品名称
      * @param priceMin  商品单价最小值
      * @param priceMax 商品单价最大值
-     * @param cid   分页id
+     * @param cId   分页id
      * @return
      */
 
@@ -104,5 +108,26 @@ public class ItemController {
         LayuiResult result=itemService.gitItem(page,limit,title,priceMin,priceMax,cId);
 
         return  result;
+    }
+    @RequestMapping("/fileUpload")
+    @ResponseBody
+    public PictureResult fileUpload(MultipartFile file){
+
+        try {
+            byte[] bytes=file.getBytes();
+            String fileName=file.getOriginalFilename();
+            PictureResult result=   itemService.addPicture(fileName,bytes);
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    @RequestMapping("/addItem")
+    @ResponseBody
+    public TaotaoResult addItem(TbItem tbItem,String itemDesc){
+       TaotaoResult result= itemService.addItem(tbItem,itemDesc);
+
+        return result;
     }
 }
