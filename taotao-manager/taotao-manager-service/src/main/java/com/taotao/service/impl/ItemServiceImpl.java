@@ -106,7 +106,6 @@ public class ItemServiceImpl implements ItemService {
             PicturData data=new PicturData();
             data.setSrc(FTPConstant.IMAGE_BASE_URL+"/"+filePath+"/"+filenmae);
             result.setData(data);
-            System.out.println(data.getSrc());
             return result;
         }
        return null;
