@@ -9,6 +9,6 @@ import java.util.List;
 public interface TbItemCatMapper {
 
     @Select("SELECT * FROM tbitemcat WHERE parentId = #{id}")
-    List<TbItemCat> findTbItemCatByParentId( Long id);
+    List<TbItemCat> findTbItemCatByParentId(Long id);
 
 }

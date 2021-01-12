@@ -1,5 +1,6 @@
 package com.taotao.service;
 
+import com.taotao.pojo.ItemCatResult;
 import com.taotao.pojo.LayuiResult;
 import com.taotao.pojo.ZtreeResult;
 
@@ -18,4 +19,10 @@ public interface ItemCatService {
      */
     List<ZtreeResult> getZtreeResult(Long id);
 
+    /**
+     * 查询所有类目信息
+     * @return
+     */
+
+    ItemCatResult getItemCats();
 }

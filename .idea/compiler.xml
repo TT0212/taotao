@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="taotao-manager-interface" />
+        <module name="taotao-portal-web" />
         <module name="taotao-manager-service" />
         <module name="taotao-manager-web" />
         <module name="taotao-manager-dao" />
@@ -23,6 +24,7 @@
       <module name="taotao-manager-service" target="1.7" />
       <module name="taotao-manager-web" target="1.7" />
       <module name="taotao-parent" target="1.7" />
+      <module name="taotao-portal-web" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
