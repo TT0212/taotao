@@ -43,4 +43,14 @@ public class ContentController {
         return result;
     }
 
+
+    @RequestMapping("/addContent")
+    @ResponseBody
+    public LayuiResult addContent(TbContent tbContent,@RequestParam(value = "page",defaultValue = "1") Integer page,@RequestParam(value = "limit",defaultValue = "10") Integer limit){
+        LayuiResult result=itemContentService.addContent(tbContent,page,limit);
+
+
+        return result;
+    }
+
 }

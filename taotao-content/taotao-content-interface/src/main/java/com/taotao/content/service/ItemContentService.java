@@ -26,4 +26,13 @@ public interface ItemContentService {
      * @return
      */
     LayuiResult deleteContentByCategoryId(List<TbContent> tbContents, Integer page, Integer limit);
+
+    /**
+     * 新添加类容信息
+     * @param tbContent
+     * @param page
+     * @param limit
+     * @return
+     */
+    LayuiResult addContent(TbContent tbContent, Integer page, Integer limit);
 }
