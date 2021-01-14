@@ -3,11 +3,7 @@ package com.taotao.content.service.impl;
 import com.taotao.content.service.ItemContentService;
 import com.taotao.mapper.TbContentCategoryMapper;
 import com.taotao.mapper.TbContentMapper;
-import com.taotao.pojo.LayuiResult;
-import com.taotao.pojo.TbContent;
-import com.taotao.pojo.TbContentCategory;
-import com.taotao.pojo.ZtreeResult;
-import com.taotao.utils.IDUtils;
+import com.taotao.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -97,5 +93,25 @@ public class ItemContentServiceImpl implements ItemContentService {
         result.setData(data);
 
         return result;
+    }
+
+    @Override
+    public List<Ad1Node> showAd1ode() {
+        List<Ad1Node> ad1Nodes=new ArrayList<>();
+        List<TbContent> tbContents= tbContentMapper.findContentByPage(89L,0,10);
+        for (TbContent content:tbContents) {
+            Ad1Node node=new Ad1Node();
+            node.setSrcB(content.getPic2());
+            node.setHeight(240);
+            node.setAlt(content.getTitleDesc());
+            node.setWidth(670);
+            node.setSrc(content.getPic());
+            node.setWidthB(550);
+            node.setHref(content.getUrl());
+            node.setHeightB(240);
+            ad1Nodes.add(node);
+        }
+
+       return ad1Nodes;
     }
 }

@@ -1,5 +1,6 @@
 package com.taotao.content.service;
 
+import com.taotao.pojo.Ad1Node;
 import com.taotao.pojo.LayuiResult;
 import com.taotao.pojo.TbContent;
 import com.taotao.pojo.ZtreeResult;
@@ -35,4 +36,6 @@ public interface ItemContentService {
      * @return
      */
     LayuiResult addContent(TbContent tbContent, Integer page, Integer limit);
+
+    List<Ad1Node> showAd1ode();
 }
