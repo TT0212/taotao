@@ -34,7 +34,7 @@ public class IndexController {
     @RequestMapping("/itemCat/all")
     @ResponseBody
     public String showItemCat(){
-        ItemCatResult result =  itemCatService.getItemCats();
+        ItemCatResult result = itemCatService.getItemCats();
         String json = JsonUtils.objectToJson(result);
         return json;
     }
