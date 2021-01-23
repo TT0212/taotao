@@ -1,6 +1,7 @@
 package com.taotao.mapper;
 
 
+import com.taotao.pojo.SearchItem;
 import com.taotao.pojo.TbItem;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -31,4 +32,6 @@ public interface TbItemMapper {
 
     @Insert("INSERT INTO tbitem(id, title, sellPoint, price, num,barcode, image, cId, created, updated) VALUE (#{id},#{title},#{sellPoint},#{price},#{num},#{barcode},#{image},#{cId},#{created},#{updated})")
     int addItem(TbItem tbItem);
+
+    List<SearchItem> findSearchItemAll();
 }

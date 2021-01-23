@@ -12,6 +12,8 @@
         <module name="taotao-content-interface" />
         <module name="taotao-manager-service" />
         <module name="taotao-manager-web" />
+        <module name="taotao-search-service" />
+        <module name="taotao-search-interface" />
         <module name="taotao-manager-dao" />
         <module name="taotao-common" />
         <module name="taotao-manager-pojo" />
@@ -30,6 +32,9 @@
       <module name="taotao-manager-web" target="1.7" />
       <module name="taotao-parent" target="1.7" />
       <module name="taotao-portal-web" target="1.7" />
+      <module name="taotao-search" target="1.7" />
+      <module name="taotao-search-interface" target="1.7" />
+      <module name="taotao-search-service" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
