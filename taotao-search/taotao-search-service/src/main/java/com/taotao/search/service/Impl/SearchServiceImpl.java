@@ -113,5 +113,28 @@ public class SearchServiceImpl implements SearchService {
         return null;
     }
 
+    @Override
+    public void addSearchItem(SearchItem item) {
+      try {
+          SolrInputDocument document = new SolrInputDocument();
+          document.addField("id", item.getId());
+          document.addField("item_title", item.getTitle());
+          document.addField("item_sell_point", item.getSellPoint());
+          //存储成为 Lucene结构的图片 也是多张图片
+          document.addField("item_price", item.getPrice());
+          document.addField("item_image", item.getImage());
+          document.addField("item_category_name", item.getCategoryName());
+          document.addField("item_desc", item.getItemDesc());
+
+          solrServer.add(document);
+          solrServer.commit();
+        } catch (SolrServerException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 }

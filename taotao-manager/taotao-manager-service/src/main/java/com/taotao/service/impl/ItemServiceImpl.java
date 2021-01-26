@@ -9,8 +9,11 @@ import com.taotao.mapper.TbItemMapper;
 import com.taotao.utils.FtpUtil;
 import com.taotao.utils.IDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 
+import javax.jms.*;
 import java.io.ByteArrayInputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,6 +28,10 @@ public class ItemServiceImpl implements ItemService {
     private TbItemMapper tbItemMapper;
     @Autowired
     private TbItemDescMapper tbItemDescMapper;
+    @Autowired
+    private JmsTemplate jmsTemplate;
+    @Autowired
+    private Destination destination;
 
     @Override
     public TbItem findTbItemById(Long itemId) {
@@ -114,7 +121,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public TaotaoResult addItem(TbItem tbItem, String itemDesc) {
         //生成一个商品id
-        Long itemId=IDUtils.genItemId();
+        final Long itemId=IDUtils.genItemId();
         //生成一个当前时间作为创建时间和修改时间
         Date date=new Date();
         tbItem.setId(itemId);
@@ -136,6 +143,15 @@ public class ItemServiceImpl implements ItemService {
         if (j<=0){
             return TaotaoResult.build(500,"添加商品描述失败");
         }
+        //solr索引同步
+        jmsTemplate.send(destination, new MessageCreator() {
+            @Override
+            public Message createMessage(Session session) throws JMSException {
+                TextMessage textMessage = session.createTextMessage();
+                textMessage.setText(itemId+"");
+                return textMessage;
+            }
+        });
 
         return TaotaoResult.build(200,"添加商品成功");
     }
