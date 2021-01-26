@@ -14,8 +14,6 @@
         <module>../taotao-content</module>
         <module>../taotao-search</module>
         <module>../taotao-search-web</module>
-        <module>../taotao-item-wweb</module>
-        <module>../taotao-item-web</module>
     </modules>
     <packaging>pom</packaging>
     <!-- 集中定义依赖版本号 -->
