@@ -1,10 +1,10 @@
 package com.taotao.service.impl;
 
+import com.taotao.service.JedisClient;
 import org.apache.commons.lang3.StringUtils;
 import com.taotao.mapper.TbItemCatMapper;
 import com.taotao.pojo.*;
 import com.taotao.service.ItemCatService;
-import com.taotao.service.JedisClient;
 import com.taotao.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

@@ -7,7 +7,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 @Component
-public class JedisClientImpl implements JedisClient {
+public class JedisClientPool implements JedisClient {
     @Autowired
     private JedisPool jedisPool;
 
