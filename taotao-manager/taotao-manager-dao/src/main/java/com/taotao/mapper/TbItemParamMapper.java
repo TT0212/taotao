@@ -14,7 +14,7 @@ public interface TbItemParamMapper {
     @Select("SELECT * FROM tbitemparamgroup WHERE itemCatId = #{cId}")
     List<TbItemParamGroup> findTbItemGroupByCId(Long cId);
 
-    int addGroup(TbItemParamGroup group);
+    int addGroup( TbItemParamGroup group);
 
     int addGroupKey(@Param("paramKeys") List<TbItemParamKey> paramKeys);
     @Select("SELECT * FROM tbitemparamkey WHERE groupId = #{id}")

@@ -33,7 +33,6 @@ public class ItemGroupServiceImpl implements ItemGroupService {
     @Override
     public TaotaoResult addGroup(Long cId, String params) {
         //因为 页面拼接字符串 可能出现的情况为
-
         List<TbItemParamGroup> groups = new ArrayList<TbItemParamGroup>();
         String[] groupAndKey = params.split("clive");
         for (String str:groupAndKey) {

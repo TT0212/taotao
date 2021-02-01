@@ -48,7 +48,7 @@
     <!--JMS 消息接收者-->
     <!-- 真正可以产生Connection的ConnectionFactory，由对应的 JMS服务厂商提供 -->
     <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
-        <property name="brokerURL" value="tcp://192.168.175.100:61616" />
+        <property name="brokerURL" value="tcp://192.168.75.100:61616" />
     </bean>
     <!-- Spring用于管理真正的ConnectionFactory的ConnectionFactory -->
     <bean id="connectionFactory"
@@ -78,6 +78,7 @@
     <dubbo:registry protocol="zookeeper" address="192.168.75.100:2181"/>
     <!--接受服务-->
     <dubbo:reference interface="com.taotao.service.ItemService" id="itemService" />
+
 
 
 </beans>

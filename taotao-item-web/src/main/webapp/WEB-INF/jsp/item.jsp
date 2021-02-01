@@ -273,7 +273,7 @@
                     //返回商品规格的html，直接显示到页面
                     /*	alert(data);
                         alert(data.toString());*/
-
+					console.log(data);
                     $("#product-detail-2").append(data);
 
 

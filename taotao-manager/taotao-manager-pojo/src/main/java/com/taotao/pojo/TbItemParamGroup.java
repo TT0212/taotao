@@ -3,7 +3,7 @@ package com.taotao.pojo;
 import java.io.Serializable;
 import java.util.List;
 
-public class TbItemParamGroup implements Serializable {
+public class TbItemParamGroup implements Serializable{
 	private Integer id;
 	private String groupName;
 	private Long itemCatId;

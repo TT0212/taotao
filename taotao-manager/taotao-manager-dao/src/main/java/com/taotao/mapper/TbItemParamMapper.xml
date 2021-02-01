@@ -47,7 +47,7 @@
                 INNER JOIN tbitemparamkey b ON a.paramId = b.id
                 INNER JOIN tbitemparamgroup c ON b.groupId = c.id
         WHERE
-            a.itemId = 158916214823693
+            a.itemId = #{itemId}
     </select>
 
 </mapper>

@@ -1,12 +1,11 @@
 package com.taotao.service.impl;
-
 import com.taotao.constant.FTPConstant;
 import com.taotao.constant.RedisConstant;
 import com.taotao.mapper.TbItemDescMapper;
+import com.taotao.mapper.TbItemMapper;
+import com.taotao.mapper.TbItemParamMapper;
 import com.taotao.pojo.*;
 import com.taotao.service.ItemService;
-import com.taotao.mapper.TbItemMapper;
-
 import com.taotao.service.JedisClient;
 import com.taotao.utils.FtpUtil;
 import com.taotao.utils.IDUtils;
@@ -16,18 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
-
 import javax.jms.*;
 import java.io.ByteArrayInputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
+import java.util.*;
 
 @Service
 public class ItemServiceImpl implements ItemService {
-
     @Autowired
     private TbItemMapper tbItemMapper;
     @Autowired
@@ -38,29 +32,35 @@ public class ItemServiceImpl implements ItemService {
     private Destination destination;
     @Autowired
     private JedisClient jedisClient;
+    @Autowired
+    private TbItemParamMapper tbItemParamMapper;
+
+
 
     @Override
     public TbItem findTbItemById(Long itemId) {
-        int rand = (int) (Math.random() * 1000) + 1;
-        String json = jedisClient.get(RedisConstant.ITEM_INFO);
-       if (StringUtils.isNotBlank(json)){
-           if (json.equals(null)){
-               return null;
-           }else {
-               TbItem tbItem = JsonUtils.jsonToPojo(json, TbItem.class);
-               jedisClient.expire(RedisConstant.ITEM_INFO, RedisConstant.REDIS_TIME_OUT + rand);
-               return tbItem;
-           }
-       }
-        TbItem tbItem=tbItemMapper.findTbItemById(itemId);
-        if (tbItem==null){
-            jedisClient.set(RedisConstant.ITEM_INFO,"null");
-            jedisClient.expire(RedisConstant.ITEM_INFO, RedisConstant.REDIS_TIME_OUT);
-        }else {
-            //把数据库查询得到的结构存到redis缓存中
-            jedisClient.set(RedisConstant.ITEM_INFO, JsonUtils.objectToJson(tbItem));
-            jedisClient.expire(RedisConstant.ITEM_INFO, RedisConstant.REDIS_TIME_OUT + rand);
+        String json = jedisClient.get(RedisConstant.ITEM_INFO +":"+itemId);
+        int rand = (int)(Math.random()*1000)+1;
+        //当json不为null 有数据的时候
+        if(StringUtils.isNotBlank(json)){
+            if(json.equals("null")){
+                return null;
+            }else{
+                TbItem tbItem = JsonUtils.jsonToPojo(json, TbItem.class);
+                jedisClient.expire(RedisConstant.ITEM_INFO+":"+itemId,RedisConstant.REDIS_TIME_OUT+rand);
+                return tbItem;
+            }
         }
+        TbItem tbItem = tbItemMapper.findTbItemById(itemId);
+        if(tbItem==null){
+            jedisClient.set(RedisConstant.ITEM_INFO +":"+itemId,"null");
+            jedisClient.expire(RedisConstant.ITEM_INFO +":"+itemId,RedisConstant.REDIS_TIME_OUT);
+        }else {
+            //吧查询数据库得到的结果集存入到redis缓存中
+            jedisClient.set(RedisConstant.ITEM_INFO +":"+itemId, JsonUtils.objectToJson(tbItem));
+            jedisClient.expire(RedisConstant.ITEM_INFO +":"+itemId,RedisConstant.REDIS_TIME_OUT+rand);
+        }
+
         return tbItem;
     }
 
@@ -144,7 +144,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public TaotaoResult addItem(TbItem tbItem, String itemDesc) {
+    public TaotaoResult addItem(TbItem tbItem, String itemDesc,List<Integer> paramKeyIds,List<String> paramValue) {
         //生成一个商品id
         final Long itemId=IDUtils.genItemId();
         //生成一个当前时间作为创建时间和修改时间
@@ -168,7 +168,17 @@ public class ItemServiceImpl implements ItemService {
         if (j<=0){
             return TaotaoResult.build(500,"添加商品描述失败");
         }
-        //solr索引同步
+        for (int k = 0; k < paramKeyIds.size(); k++) {
+            TbItemParamValue tbItemParamValue=new TbItemParamValue();
+            tbItemParamValue.setItemId(itemId);
+            tbItemParamValue.setParamId(paramKeyIds.get(k));
+            tbItemParamValue.setParamValue(paramValue.get(k));
+            int z = tbItemParamMapper.addGroupValue(tbItemParamValue);
+            if (z<=0){
+                return TaotaoResult.build(500,"添加商品规格参数失败");
+            }
+        }
+
         jmsTemplate.send(destination, new MessageCreator() {
             @Override
             public Message createMessage(Session session) throws JMSException {
@@ -205,6 +215,31 @@ public class ItemServiceImpl implements ItemService {
         }
 
         return tbItemDesc;
+    }
+
+    @Override
+    public List<TbItemParamGroup> findTbItemGroupByItemId(Long itemId) {
+        int rand = (int) (Math.random() * 1000) + 1;
+        String json = jedisClient.get(RedisConstant.ITEM_PARAM);
+        if (StringUtils.isNotBlank(json)) {
+            if (json.equals(null)) {
+                return null;
+            } else {
+                List<TbItemParamGroup> tbItemParamGroups = JsonUtils.jsonToPojo(json, List.class);
+                jedisClient.expire(RedisConstant.ITEM_PARAM, RedisConstant.REDIS_TIME_OUT + rand);
+                return tbItemParamGroups;
+            }
+        }
+        List<TbItemParamGroup> list= tbItemParamMapper.findTbItemGroupByItemId(itemId);
+        if (list==null){
+            jedisClient.set(RedisConstant.ITEM_PARAM,"null");
+            jedisClient.expire(RedisConstant.ITEM_PARAM, RedisConstant.REDIS_TIME_OUT);
+        }else {
+            //把数据库查询得到的结构存到redis缓存中
+            jedisClient.set(RedisConstant.ITEM_PARAM, JsonUtils.objectToJson(list));
+            jedisClient.expire(RedisConstant.ITEM_PARAM, RedisConstant.REDIS_TIME_OUT + rand);
+        }
+        return list;
     }
 
 }
