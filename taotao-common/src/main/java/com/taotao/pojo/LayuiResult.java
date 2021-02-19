@@ -3,7 +3,7 @@ package com.taotao.pojo;
 import java.io.Serializable;
 import java.util.List;
 
-public class LayuiResult implements Serializable {
+public class LayuiResult implements Serializable{
     private int code;
     private String msg;
     private int count;
@@ -43,7 +43,7 @@ public class LayuiResult implements Serializable {
 
     @Override
     public String toString() {
-        return "LayuiResuult{" +
+        return "LayuiResult{" +
                 "code=" + code +
                 ", msg='" + msg + '\'' +
                 ", count=" + count +

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.List;
 
-public class ItemCat implements Serializable {
+public class ItemCat implements Serializable{
     @JsonProperty("u")
     private String url;
     @JsonProperty("n")

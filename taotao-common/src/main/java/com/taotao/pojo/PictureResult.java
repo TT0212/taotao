@@ -2,7 +2,7 @@ package com.taotao.pojo;
 
 import java.io.Serializable;
 
-public class PictureResult implements Serializable {
+public class PictureResult implements Serializable{
     private int code;
     private String msg;
     private PicturData data;

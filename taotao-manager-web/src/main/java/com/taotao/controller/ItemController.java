@@ -27,11 +27,10 @@ public class ItemController {
      */
     @RequestMapping("/{itemId}")
     @ResponseBody
-    public TbItem getItemById(@PathVariable Long itemId) {
-        TbItem tbItem = itemService.findTbItemById(itemId);
-        return tbItem;
+    public TbItem findTbItem(@PathVariable Long itemId){
+        TbItem result = itemService.findTbItemById(itemId);
+        return result;
     }
-
     /**
      * 查询数据库tbitem表中 的总记录条数
      * @param page
@@ -67,10 +66,9 @@ public class ItemController {
      */
     @RequestMapping("/commodityUpperShelves")
     @ResponseBody
-    public TaotaoResult commodityUpperShelves(@RequestBody  List<TbItem> tbItems){
-        Date date=new Date();
-        TaotaoResult result= itemService.updateItem(tbItems,1,date);
-
+    public TaotaoResult commodityUpperShelves(@RequestBody List<TbItem> tbItems){
+        Date date = new Date();
+        TaotaoResult result =  itemService.updateItem(tbItems,1,date);
         return result;
     }
 

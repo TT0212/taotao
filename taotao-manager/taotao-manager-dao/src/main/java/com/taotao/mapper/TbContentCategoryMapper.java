@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface TbContentCategoryMapper {
 
-    @Select("SELECT *FROM tbcontentcategory WHERE parentId= #{id}")
-    List<TbContentCategory> findContentByParenid(Long id);
+    @Select("SELECT * FROM tbcontentcategory WHERE parentId = #{id}")
+    List<TbContentCategory> findContentByParentId(Long id);
 }

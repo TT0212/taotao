@@ -28,7 +28,7 @@ public class ItemContentServiceImpl implements ItemContentService {
     @Override
     public List<ZtreeResult> getZtreeResult(Long id) {
         List<ZtreeResult> results=new ArrayList<>();
-        List<TbContentCategory> tbContentCategories=tbContentCategoryMapper.findContentByParenid(id);
+        List<TbContentCategory> tbContentCategories=tbContentCategoryMapper.findContentByParentId(id);
         for (TbContentCategory tbcc:tbContentCategories) {
             ZtreeResult ztreeResult=new ZtreeResult();
             ztreeResult.setId(tbcc.getId());

@@ -2,7 +2,7 @@ package com.taotao.pojo;
 
 import java.io.Serializable;
 
-public class Ad1Node implements Serializable {
+public class Ad1Node implements Serializable{
     private String srcB;
     private Integer height;
     private String alt;

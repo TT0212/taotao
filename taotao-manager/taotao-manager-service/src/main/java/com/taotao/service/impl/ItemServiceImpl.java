@@ -1,4 +1,5 @@
 package com.taotao.service.impl;
+
 import com.taotao.constant.FTPConstant;
 import com.taotao.constant.RedisConstant;
 import com.taotao.mapper.TbItemDescMapper;
@@ -130,7 +131,7 @@ public class ItemServiceImpl implements ItemService {
         //随机生成一个字符串 本身的名字只要后缀名
         String filenmae= IDUtils.genImageName()+fileName.substring(fileName.lastIndexOf("."));
         ByteArrayInputStream bis=new ByteArrayInputStream(bytes);
-       boolean b= FtpUtil.uploadFile(FTPConstant.FIP_ADDRERSS,FTPConstant.FTP_PORT,FTPConstant.FTP_USERNAME,FTPConstant.FTP_PASSWORD,FTPConstant.FTP_UPLOAD_PATH,filePath,filenmae,bis);
+        boolean b= FtpUtil.uploadFile(FTPConstant.FIP_ADDRERSS,FTPConstant.FTP_PORT,FTPConstant.FTP_USERNAME,FTPConstant.FTP_PASSWORD,FTPConstant.FTP_UPLOAD_PATH,filePath,filenmae,bis);
         if (b){
             PictureResult result=new PictureResult();
             result.setCode(0);
@@ -140,7 +141,7 @@ public class ItemServiceImpl implements ItemService {
             result.setData(data);
             return result;
         }
-       return null;
+        return null;
     }
 
     @Override

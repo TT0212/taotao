@@ -22,8 +22,6 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-
-
     @RequestMapping("/{itemId}")
     public String showItem(@PathVariable Long itemId, Model model){
         TbItem tbItem = itemService.findTbItemById(itemId);
@@ -35,13 +33,15 @@ public class ItemController {
     @ResponseBody
     public String showItemDesc(@PathVariable Long itemId){
         TbItemDesc itemDesc = itemService.findTbItemDescByItemId(itemId);
-
         return itemDesc.getItemDesc();
     }
     @RequestMapping("/param/{itemId}")
     @ResponseBody
     public String showItemParam(@PathVariable Long itemId){
         List<TbItemParamGroup> groupList = itemService.findTbItemGroupByItemId(itemId);
+        if(groupList.size()==0){
+            return "";
+        }
         StringBuffer sb = new StringBuffer();
         sb.append("<table cellpadding=\"0\" cellspacing=\"1\" width=\"100%\" border=\"0\" class=\"Ptable\">\n");
         sb.append("    <tbody>\n");

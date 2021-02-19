@@ -3,7 +3,7 @@ package com.taotao.pojo;
 import java.io.Serializable;
 import java.util.List;
 
-public class ItemCatResult implements Serializable {
+public class ItemCatResult implements Serializable{
     private List<?> data;
 
     public List<?> getData() {
