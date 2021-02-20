@@ -16,9 +16,12 @@
         <module name="taotao-item-web" />
         <module name="taotao-manager-pojo" />
         <module name="taotao-portal-web" />
+        <module name="taotao-sso-web" />
         <module name="taotao-manager-web" />
+        <module name="taotao-sso-interface" />
         <module name="taotao-manager-dao" />
         <module name="taotao-common" />
+        <module name="taotao-sso-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -39,6 +42,10 @@
       <module name="taotao-search-interface" target="1.7" />
       <module name="taotao-search-service" target="1.7" />
       <module name="taotao-search-web" target="1.7" />
+      <module name="taotao-sso" target="1.7" />
+      <module name="taotao-sso-interface" target="1.7" />
+      <module name="taotao-sso-service" target="1.7" />
+      <module name="taotao-sso-web" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

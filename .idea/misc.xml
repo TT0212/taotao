@@ -8,6 +8,8 @@
     <file type="web" url="file://$PROJECT_DIR$/taotao-portal-web" />
     <file type="web" url="file://$PROJECT_DIR$/taotao-search-web" />
     <file type="web" url="file://$PROJECT_DIR$/taotao-search/taotao-search-service" />
+    <file type="web" url="file://$PROJECT_DIR$/taotao-sso-web" />
+    <file type="web" url="file://$PROJECT_DIR$/taotao-sso/taotao-sso-service" />
     <type id="Spring" />
   </component>
   <component name="MavenProjectsManager">
