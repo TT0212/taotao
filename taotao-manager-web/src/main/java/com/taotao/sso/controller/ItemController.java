@@ -1,4 +1,4 @@
-package com.taotao.controller;
+package com.taotao.sso.controller;
 
 import com.taotao.pojo.LayuiResult;
 import com.taotao.pojo.PictureResult;
