@@ -1,4 +1,4 @@
-package com.taotao.sso.controller;
+package com.taotao.sso.conteroller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

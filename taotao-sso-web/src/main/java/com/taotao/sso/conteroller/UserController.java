@@ -1,4 +1,4 @@
-package com.taotao.sso.controller;
+package com.taotao.sso.conteroller;
 
 import com.taotao.pojo.TaotaoResult;
 import com.taotao.pojo.TbUser;

@@ -15,7 +15,7 @@
        http://www.springframework.org/schema/context/spring-context-4.2.xsd">
     <context:property-placeholder location="classpath:*.properties"/>
     <!--注解扫描-->
-    <context:component-scan base-package="com.taotao.sso.controller" />
+    <context:component-scan base-package="com.taotao.sso.conteroller,com.taotao.sso.exception" />
     <!--注解驱动-->
     <mvc:annotation-driven />
     <!--放行静态资源-->

@@ -14,7 +14,7 @@
        http://www.springframework.org/schema/context/spring-context-4.2.xsd">
     <!--注解扫描-->
     <context:property-placeholder location="classpath:log4j.properties"/>
-    <context:component-scan base-package="com.taotao.portal.controller" />
+    <context:component-scan base-package="com.taotao.portal.controller,com.taotao.portal.exception" />
     <!--注解驱动-->
     <mvc:annotation-driven>
         <mvc:message-converters>

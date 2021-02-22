@@ -1,4 +1,4 @@
-package com.taotao.sso.controller;
+package com.taotao.controller;
 
 import com.taotao.pojo.TaotaoResult;
 import com.taotao.service.ItemGroupService;

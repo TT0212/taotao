@@ -1,4 +1,4 @@
-package com.taotao.sso.controller;
+package com.taotao.controller;
 
 import com.taotao.content.service.ItemContentService;
 import com.taotao.pojo.LayuiResult;
